@@ -11,7 +11,7 @@ provided. Google Calendar does not show private event summaries, so I created th
 ## Usage
 Run docker container with the following command:
 ```bash
-docker run -d -p 80:80 -e ical-unprivate
+docker run -d -p 80:80 -e skhrvg/ical-unprivate
 ```
 Then you can use the proxy by passing the URL of the private iCal feed as a query parameter:
 ```
@@ -24,7 +24,7 @@ The proxy will then return the iCal feed with all events set to public.
 version: '3.7'
 services:
   ical-unprivate:
-    image: ical-unprivate:latest
+    image: skhrvg/ical-unprivate:latest
     ports:
       - 80:80
 ```
