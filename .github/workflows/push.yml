@@ -27,9 +27,16 @@ jobs:
           username: skhrvg
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: Build and push
+        if: ${{github.event.inputs.latest != 'true'}}
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: skhrvg/ical-unprivate:${{ github.event.inputs.tag }}
+      - name: Build and push with latest tag
+        if: ${{github.event.inputs.latest == 'true'}}
         uses: docker/build-push-action@v5
         with:
           push: true
           tags: |
             skhrvg/ical-unprivate:${{ github.event.inputs.tag }}
-            ${{ if github.event.inputs.latest == 'true' }}skhrvg/ical-unprivate:latest${{ endif }}
+            skhrvg/ical-unprivate:latest
